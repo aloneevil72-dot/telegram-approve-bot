@@ -40,10 +40,12 @@ bot.onText(/📤 Submit Proof/, (msg) => {
 /* PROOF FORWARD SYSTEM */
 bot.on('message', async (msg) => {
 
-    if (msg.text === "/start") return;
-    if (msg.text === "💼 Work Status") return;
-    if (msg.text === "💰 Payment Status") return;
-    if (msg.text === "📤 Submit Proof") return;
+    if (
+        msg.text === "/start" ||
+        msg.text === "💼 Work Status" ||
+        msg.text === "💰 Payment Status" ||
+        msg.text === "📤 Submit Proof"
+    ) return;
 
     if (msg.chat.id.toString() !== adminId) {
 
@@ -58,12 +60,12 @@ bot.on('message', async (msg) => {
             }
         };
 
-        bot.sendMessage(adminId,
+        await bot.sendMessage(adminId,
             `📩 New Proof Received\nUser ID: ${msg.chat.id}`,
             options
         );
 
-        bot.forwardMessage(adminId, msg.chat.id, msg.message_id);
+        await bot.forwardMessage(adminId, msg.chat.id, msg.message_id);
     }
 });
 
